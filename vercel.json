@@ -1,0 +1,5 @@
+{
+  "buildCommand": "echo 'Static frontend, no build needed'",
+  "outputDirectory": "frontend",
+  "framework": "other"
+}

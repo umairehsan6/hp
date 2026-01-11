@@ -1,0 +1,31 @@
+# Environment files
+.env
+.env.local
+
+# Virtual environments
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Backend data and cache
+backend/data/
+backend/.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# Logs
+*.log
