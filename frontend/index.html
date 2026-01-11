@@ -8,22 +8,40 @@
 </head>
 <body>
   <div class="container">
-    <h1>Ask about Saqlain</h1>
-    <p>Try: "What's your name?", "Where do you live?", or ask personality questions.</p>
-    <div class="ask">
-      <input id="question" placeholder="Ask a question..." aria-label="Question input" />
-      <button id="askBtn">Ask</button>
-    </div>
-    <div id="answer" class="answer" aria-live="polite"></div>
-    <hr />
-    <h3>Ingest CV / Text</h3>
-    <form id="ingestForm">
-      <textarea id="rawtext" placeholder="Paste CV text here (or use file upload below)" rows="6"></textarea>
-      <div style="margin-top:8px">
-        <input type="file" id="fileInput" />
-        <button type="submit">Ingest</button>
+    <header class="hero">
+      <div>
+        <h1>Ask about Saqlain</h1>
+        <p class="tag">Quick Q&A from Saqlain's CV — offline, private, and fast.</p>
       </div>
-    </form>
+      <div id="status" class="status">Checking...</div>
+    </header>
+
+    <main class="card">
+      <section class="ask">
+        <div class="input-wrap">
+          <input id="question" placeholder="Ask a question... e.g. Where did you study?" aria-label="Question input" />
+          <button id="askBtn" class="primary">Ask</button>
+        </div>
+        <div id="spinner" class="spinner" aria-hidden="true"></div>
+      </section>
+      <section id="resultsArea">
+        <div id="answer" class="answer" aria-live="polite"></div>
+        <div id="results" class="results"></div>
+      </section>
+      <hr />
+      <section class="ingest">
+        <h3>Ingest CV / Text</h3>
+        <form id="ingestForm" class="ingest-form">
+          <textarea id="rawtext" placeholder="Paste CV text here (or use file upload below)" rows="6"></textarea>
+          <div class="ingest-controls">
+            <input type="file" id="fileInput" accept=".pdf,.txt" />
+            <button type="submit" id="ingestBtn">Ingest</button>
+          </div>
+        </form>
+        <p class="hint">Once ingested the CV will be used to answer visitor questions.</p>
+      </section>
+    </main>
+    <footer class="attribution">Built for Saqlain — local embeddings, no external LLMs.</footer>
   </div>
   <script src="script.js"></script>
 </body>

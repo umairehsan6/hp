@@ -4,3 +4,6 @@ python-multipart
 scikit-learn
 numpy
 python-dotenv
+ pypdf
+sentence-transformers
+chromadb
