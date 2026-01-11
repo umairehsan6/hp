@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Saqlain — Profile Chat</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Ask about Saqlain</h1>
+    <p>Try: "What's your name?", "Where do you live?", or ask personality questions.</p>
+    <div class="ask">
+      <input id="question" placeholder="Ask a question..." aria-label="Question input" />
+      <button id="askBtn">Ask</button>
+    </div>
+    <div id="answer" class="answer" aria-live="polite"></div>
+    <hr />
+    <h3>Ingest CV / Text</h3>
+    <form id="ingestForm">
+      <textarea id="rawtext" placeholder="Paste CV text here (or use file upload below)" rows="6"></textarea>
+      <div style="margin-top:8px">
+        <input type="file" id="fileInput" />
+        <button type="submit">Ingest</button>
+      </div>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
