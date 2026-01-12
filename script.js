@@ -10,7 +10,7 @@ const ingestForm = document.getElementById('ingestForm');
 // -----------------------------
 // CONFIG: Your ngrok URL
 // Update this every time you start ngrok
-const API_URL = 'https://87b9a958cb08.ngrok-free.app';
+const API_URL = 'https://3f41e6f02666.ngrok-free.app/chat';
 
 // -----------------------------
 // Utility: show/hide CV ingest form depending on backend status
