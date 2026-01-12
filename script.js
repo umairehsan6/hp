@@ -5,7 +5,9 @@ const spinner = document.getElementById('spinner');
 const resultsEl = document.getElementById('results');
 
 // API URL — points to your local backend via ngrok
-const API_URL = 'https://52fbfbae5308.ngrok-free.app'; // replace with your ngrok URL if it changes
+// For Vercel frontend, always use your current ngrok URL
+const API_URL = 'https://52fbfbae5308.ngrok-free.app';
+ // replace with your ngrok URL if it changes
 
 async function askQuestion(q){
   if(!q || !q.trim()){
