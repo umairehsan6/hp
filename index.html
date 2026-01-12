@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me Chatbot</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0; }
+    #chat-container { width: 400px; margin: 50px auto; border: 1px solid #ccc; border-radius: 8px; padding: 10px; background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    #chat-box { height: 400px; overflow-y: auto; border-bottom: 1px solid #ccc; padding: 10px; }
+    .message { margin: 5px 0; padding: 8px; border-radius: 8px; max-width: 80%; word-wrap: break-word; }
+    .user-msg { background-color: #DCF8C6; text-align: right; margin-left: auto; }
+    .bot-msg { background-color: #F1F0F0; text-align: left; margin-right: auto; }
+    #input-area { display: flex; margin-top: 10px; gap: 5px; }
+    #question { flex: 1; padding: 8px; border-radius: 4px; border: 1px solid #ccc; }
+    #askBtn { padding: 8px 12px; border-radius: 4px; cursor: pointer; background: #4CAF50; color: white; border: none; }
+    #spinner { width: 20px; height: 20px; border: 3px solid #ccc; border-top: 3px solid #333; border-radius: 50%; display: none; animation: spin 1s linear infinite; margin-left: 5px; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <div id="chat-container">
+    <div id="chat-box"></div>
+    <div id="input-area">
+      <input type="text" id="question" placeholder="Ask me anything about me..." />
+      <button id="askBtn">Send</button>
+      <div id="spinner" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <script>
+    const askBtn = document.getElementById('askBtn');
+    const qInput = document.getElementById('question');
+    const chatBox = document.getElementById('chat-box');
+    const spinner = document.getElementById('spinner');
+
+    const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+      ? 'http://localhost:8000' 
+      : 'https://fc9f49a04ef1.ngrok-free.app'; // Replace with your ngrok URL if deployed
+
+    // Append a message to chat
+    function addMessage(msg, type='bot-msg'){
+      const div = document.createElement('div');
+      div.className = `message ${type}`;
+      div.innerHTML = msg.replace(/\n/g,'<br>');
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // Ask backend
+    async function askQuestion(q){
+      if(!q || !q.trim()) return;
+
+      addMessage(q, 'user-msg'); // user message
+      qInput.value = '';
+      spinner.style.display = 'inline-block';
+
+      const form = new FormData();
+      form.append('question', q);
+      form.append('top_k', '5');
+
+      try{
+        const res = await fetch(`${API_URL}/chat`, { method: 'POST', body: form });
+        if(!res.ok){
+          addMessage('Server error, please try later.');
+          return;
+        }
+        const data = await res.json();
+        const ans = data.answer && data.answer.trim() ? data.answer : 'I do not have information about that.';
+        addMessage(ans, 'bot-msg');
+      }catch(e){
+        addMessage('Network error: '+e.message, 'bot-msg');
+      } finally{
+        spinner.style.display = 'none';
+      }
+    }
+
+    // Event listeners
+    askBtn.addEventListener('click', ()=> askQuestion(qInput.value));
+    qInput.addEventListener('keydown', e=>{
+      if(e.key==='Enter'){ 
+        e.preventDefault(); 
+        askQuestion(qInput.value); 
+      }
+    });
+  </script>
+</body>
+</html>
