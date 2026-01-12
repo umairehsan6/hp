@@ -9,9 +9,9 @@ const resultsEl = document.getElementById('results');
 // API URL - points to local backend (use ngrok URL when deployed)
 // IMPORTANT: Replace 'YOUR_NGROK_URL_HERE' with your actual ngrok URL after starting ngrok
 // NEW
-const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-  ? 'http://localhost:8000' 
-  : 'https://52fbfbae5308.ngrok-free.app'; // Your current ngrok URL
+// API URL — points to your local backend via ngrok
+const API_URL = 'https://52fbfbae5308.ngrok-free.app';
+// Your current ngrok URL
 
 
 async function askQuestion(q){
