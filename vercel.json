@@ -1,0 +1,10 @@
+{
+  "buildCommand": "echo 'Static frontend, no build needed'",
+  "outputDirectory": "frontend",
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "${BACKEND_URL}/:path*"
+    }
+  ]
+}
