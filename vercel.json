@@ -1,13 +1,5 @@
 {
-  "version": 2,
-  "public": true,
-  "github": {
-    "silent": true
-  },
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/frontend/$1"
-    }
-  ]
+  "buildCommand": "cd frontend && echo 'No build needed'",
+  "outputDirectory": "frontend",
+  "cleanUrls": true
 }
