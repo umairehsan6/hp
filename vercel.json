@@ -1,10 +1,13 @@
 {
-  "buildCommand": "echo 'Static frontend, no build needed'",
-  "outputDirectory": "frontend",
+  "version": 2,
+  "public": true,
+  "github": {
+    "silent": true
+  },
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "${BACKEND_URL}/:path*"
+      "source": "/(.*)",
+      "destination": "/frontend/$1"
     }
   ]
 }
