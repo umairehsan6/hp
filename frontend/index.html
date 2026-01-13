@@ -1,48 +1,66 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Saqlain — Profile Chat</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <div class="container">
-    <header class="hero">
-      <div>
-        <h1>Ask about Saqlain</h1>
-        <p class="tag">Quick Q&A from Saqlain's CV — offline, private, and fast.</p>
-      </div>
-      <div id="status" class="status">Checking...</div>
-    </header>
 
-    <main class="card">
-      <section class="ask">
-        <div class="input-wrap">
-          <input id="question" placeholder="Ask a question... e.g. Where did you study?" aria-label="Question input" />
-          <button id="askBtn" class="primary">Ask</button>
-        </div>
-        <div id="spinner" class="spinner" aria-hidden="true"></div>
-      </section>
-      <section id="resultsArea">
-        <div id="answer" class="answer" aria-live="polite"></div>
-        <div id="results" class="results"></div>
-      </section>
-      <hr />
-      <section class="ingest">
-        <h3>Ingest CV / Text</h3>
+<body>
+
+  <div class="app-layout">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+
+      <!-- Ingest Section -->
+      <div class="sidebar-section">
+        <div class="section-title">Knowledge Base</div>
         <form id="ingestForm" class="ingest-form">
-          <textarea id="rawtext" placeholder="Paste CV text here (or use file upload below)" rows="6"></textarea>
-          <div class="ingest-controls">
-            <input type="file" id="fileInput" accept=".pdf,.txt" />
-            <button type="submit" id="ingestBtn">Ingest</button>
+          <textarea id="rawtext" placeholder="Paste text here..." rows="4"></textarea>
+          <div class="controls">
+            <input type="file" id="fileInput" accept=".pdf,.txt" style="font-size: 0.8rem; color: #a1a1aa;">
+            <button type="submit" id="ingestBtn" class="btn btn-primary">Ingest Document</button>
+            <button type="button" id="clearBtn" class="btn btn-danger">Clear Database</button>
           </div>
         </form>
-        <p class="hint">Once ingested the CV will be used to answer visitor questions.</p>
+      </div>
+
+      <!-- Context / Retrieved Chunks -->
+      <div class="sidebar-section">
+        <div class="section-title">Retrieved Context (All)</div>
+        <div id="chunksList" style="display:flex; flex-direction:column; gap:10px;">
+          <div style="font-size:0.85rem; color:#52525b; font-style:italic;">No query yet.</div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- MAIN CHAT AREA -->
+    <main class="chat-area">
+      <header class="hero">
+        <h1>Saqlain Profile Chat</h1>
+        <div id="status" class="status">Checking...</div>
+      </header>
+
+      <section class="ask-box">
+        <input id="question" placeholder="Ask a question about Saqlain..." />
+        <button id="askBtn" class="btn btn-primary" style="padding:0 24px;">Ask</button>
       </section>
+
+      <div id="spinner" style="display:none; color:var(--text-secondary); margin-bottom:20px;">Thinking...</div>
+
+      <div id="answerArea">
+        <!-- AI Response will go here -->
+      </div>
+
     </main>
-    <footer class="attribution">Built for Saqlain — local embeddings, no external LLMs.</footer>
+
   </div>
+
   <script src="script.js"></script>
 </body>
+
 </html>
